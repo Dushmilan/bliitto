@@ -7,6 +7,24 @@
 <a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
 </p>
 
+## BLII-TTO website
+
+Laravel application serving the BLII-TTO (University of Peradeniya) website: a Blade front end backed by a database, with an admin panel and a public read-only API.
+
+### Public API
+
+Base URL `/api/v1`. Read-only, unauthenticated, JSON, paginated at 15 items per page, and rate limited to 60 requests per minute per client.
+
+| Method | Endpoint | Description |
+| --- | --- | --- |
+| `GET` | `/api/v1/news` | Published news, newest first |
+| `GET` | `/api/v1/news/{id}` | A single published news item; `404` when it is unpublished or missing |
+| `GET` | `/api/v1/announcements` | Active announcements, newest first |
+
+News item fields: `id`, `title`, `date` (`YYYY-MM-DD`), `description`, `image` (absolute URL or `null`), `link`, `updated_at` (ISO 8601).
+
+Announcement fields: `id`, `date` (`YYYY-MM-DD`), `text`, `updated_at` (ISO 8601).
+
 ## About Laravel
 
 Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
