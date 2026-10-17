@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\Admin\AuthenticatedSessionController;
+use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\HomeController;
 use Illuminate\Support\Facades\Route;
@@ -22,5 +24,34 @@ Route::view('/contact', 'pages.contact')->name('contact');
 Route::post('/contact', [ContactController::class, 'store'])
     ->middleware('throttle:6,1')
     ->name('contact.store');
+
+/*
+|--------------------------------------------------------------------------
+| Admin panel
+|--------------------------------------------------------------------------
+|
+| Served from ADMIN_DOMAIN when it is set, and from the /admin prefix
+| otherwise so local development needs no DNS changes. Login is the only
+| entry point; everything else sits behind the auth middleware.
+|
+*/
+
+$adminRoutes = function (): void {
+    Route::middleware('guest')->group(function () {
+        Route::get('/login', [AuthenticatedSessionController::class, 'create'])->name('admin.login');
+        Route::post('/login', [AuthenticatedSessionController::class, 'store'])->name('admin.login.store');
+    });
+
+    Route::middleware('auth')->group(function () {
+        Route::get('/', DashboardController::class)->name('admin.dashboard');
+        Route::post('/logout', [AuthenticatedSessionController::class, 'destroy'])->name('admin.logout');
+    });
+};
+
+if ($domain = config('admin.domain')) {
+    Route::domain($domain)->group($adminRoutes);
+} else {
+    Route::prefix('admin')->group($adminRoutes);
+}
 Route::view('/downloads', 'pages.downloads')->name('downloads');
 Route::view('/submission', 'pages.submission')->name('submission');
