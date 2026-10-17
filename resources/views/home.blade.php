@@ -49,7 +49,7 @@
                     @foreach ($news as $index => $item)
                         <div class="news-card scroll-reveal {{ $index > 0 ? 'delay-'.($index > 3 ? 3 : $index) : '' }}">
                             <div class="news-image-container">
-                                <img src="{{ $item->image ? asset($item->image) : '' }}" alt="{{ $item->title }}" class="news-img">
+                                <img src="{{ $item->image_url }}" alt="{{ $item->title }}" class="news-img">
                             </div>
                             <div class="news-content">
                                 <h3 class="news-title">{{ $item->title }}</h3>

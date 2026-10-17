@@ -18,6 +18,9 @@
             </a>
             <nav class="admin-nav">
                 <a href="{{ route('admin.dashboard') }}">Dashboard</a>
+                <a href="{{ route('admin.news.index') }}">News</a>
+                <a href="{{ route('admin.announcements.index') }}">Announcements</a>
+                <a href="{{ route('admin.messages.index') }}">Messages</a>
                 <form method="POST" action="{{ route('admin.logout') }}">
                     @csrf
                     <button type="submit" class="admin-logout">Log out</button>

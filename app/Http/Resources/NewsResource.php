@@ -21,7 +21,7 @@ class NewsResource extends JsonResource
             'title' => $this->title,
             'date' => $this->date->toDateString(),
             'description' => $this->description,
-            'image' => $this->image ? asset($this->image) : null,
+            'image' => $this->image_url,
             'link' => legacy_link($this->link),
             'updated_at' => $this->updated_at?->toIso8601String(),
         ];

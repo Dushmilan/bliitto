@@ -1,7 +1,10 @@
 <?php
 
+use App\Http\Controllers\Admin\AnnouncementController;
 use App\Http\Controllers\Admin\AuthenticatedSessionController;
+use App\Http\Controllers\Admin\ContactMessageController;
 use App\Http\Controllers\Admin\DashboardController;
+use App\Http\Controllers\Admin\NewsController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\HomeController;
 use Illuminate\Support\Facades\Route;
@@ -45,6 +48,18 @@ $adminRoutes = function (): void {
     Route::middleware('auth')->group(function () {
         Route::get('/', DashboardController::class)->name('admin.dashboard');
         Route::post('/logout', [AuthenticatedSessionController::class, 'destroy'])->name('admin.logout');
+
+        Route::resource('news', NewsController::class)
+            ->except('show')
+            ->names('admin.news');
+
+        Route::resource('announcements', AnnouncementController::class)
+            ->except('show')
+            ->names('admin.announcements');
+
+        Route::get('messages', [ContactMessageController::class, 'index'])->name('admin.messages.index');
+        Route::get('messages/{message}', [ContactMessageController::class, 'show'])->name('admin.messages.show');
+        Route::delete('messages/{message}', [ContactMessageController::class, 'destroy'])->name('admin.messages.destroy');
     });
 };
 
