@@ -19,7 +19,7 @@
                 </div>
 
                 <div class="contact-form-container scroll-reveal delay-1">
-                    <form id="contact-form" class="modern-form" method="POST" action="{{ url('/contact') }}">
+                    <form id="contact-form" class="modern-form" method="POST" action="{{ route('contact.store') }}">
                         @csrf
 
                         {{-- Honeypot: hidden from people, attractive to bots. --}}

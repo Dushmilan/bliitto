@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ContactController;
 use App\Http\Controllers\HomeController;
 use Illuminate\Support\Facades\Route;
 
@@ -17,5 +18,9 @@ Route::view('/technology-know-how', 'pages.technology-know-how')->name('technolo
 Route::view('/researchers', 'pages.researchers')->name('researchers');
 Route::view('/centers', 'pages.centers')->name('centers');
 Route::view('/contact', 'pages.contact')->name('contact');
+
+Route::post('/contact', [ContactController::class, 'store'])
+    ->middleware('throttle:6,1')
+    ->name('contact.store');
 Route::view('/downloads', 'pages.downloads')->name('downloads');
 Route::view('/submission', 'pages.submission')->name('submission');
