@@ -11,6 +11,14 @@ it('shows the login screen to guests', function () {
     $this->get(route('admin.login'))->assertOk()->assertSee('Sign in');
 });
 
+it('marks the admin body as loaded without depending on the public script', function () {
+    // styles.css hides body until script.js adds page-loaded; the admin layout
+    // loads styles.css but not script.js, so the class must be present already.
+    $this->get(route('admin.login'))
+        ->assertOk()
+        ->assertSee('class="admin-body page-loaded"', false);
+});
+
 it('signs an administrator in with valid credentials', function () {
     $user = User::factory()->create(['password' => Hash::make('secret-password')]);
 

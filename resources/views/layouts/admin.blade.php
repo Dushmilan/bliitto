@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="{{ asset('styles.css') }}">
     <link rel="stylesheet" href="{{ asset('admin.css') }}">
 </head>
-<body class="admin-body">
+<body class="admin-body page-loaded">
 @auth
     <header class="admin-header">
         <div class="container admin-header-inner">
@@ -30,7 +30,7 @@
     </header>
 @endauth
 
-<main class="admin-main">
+<main class="@yield('main_class', 'admin-main')">
     <div class="container">
         @if (session('status'))
             <div class="admin-flash">{{ session('status') }}</div>
