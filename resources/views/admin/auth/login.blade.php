@@ -77,16 +77,6 @@
                     <button type="submit" class="btn btn-primary login-submit">Sign in</button>
                 </form>
 
-                @if (config('bliitto.show_demo_credentials'))
-                    <div class="login-demo">
-                        <span class="login-demo-label">Demo access</span>
-                        <p>
-                            <span>{{ config('bliitto.demo_admin_email') }}</span>
-                            <span>{{ config('bliitto.demo_admin_password') }}</span>
-                        </p>
-                    </div>
-                @endif
-
                 <p class="login-back"><a href="{{ route('home') }}">Back to the public site</a></p>
             </div>
         </section>

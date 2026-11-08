@@ -14,10 +14,6 @@ return Application::configure(basePath: dirname(__DIR__))
         health: '/up',
     )
     ->withMiddleware(function (Middleware $middleware): void {
-        // Render terminates TLS at its proxy, so trust the forwarded headers
-        // to keep generated URLs on https.
-        $middleware->trustProxies(at: '*');
-
         // The admin panel is the only authenticated area, so point the auth
         // and guest middleware at its screens rather than the defaults.
         $middleware->redirectGuestsTo(fn () => route('admin.login'));

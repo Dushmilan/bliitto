@@ -11,7 +11,6 @@ class DatabaseSeeder extends Seeder
         $this->call([
             NewsSeeder::class,
             AnnouncementSeeder::class,
-            DemoSeeder::class,
         ]);
     }
 }
