@@ -42,8 +42,8 @@ it('does not duplicate content when seeded twice', function () {
 it('can run the full database seeder', function () {
     $this->seed();
 
-    expect(News::count())->toBe(4);
-    expect(Announcement::count())->toBe(3);
+    expect(News::count())->toBe(7);
+    expect(Announcement::count())->toBe(5);
 });
 
 it('scopes news to published records', function () {
